@@ -1,6 +1,11 @@
 # General Guide for performance(low lantency)
 
-why modern CPU make insertion faster in std::vector than std::list
+## Profiling
+1. assembly code exam
+2. profiling profile exam( perf in linux)
+
+## General code guide - explore modern processor architecture
+### why modern CPU make insertion faster in std::vector than std::list
 
 early cpu multiple clock cycles per instruction
 modern several instructions per cycle on a single core(due to piplining)
