@@ -49,6 +49,22 @@ dynamically allocated objects most of time located in different places in memory
 
 pointer-based data structures(trees, list) have nodes in differnt places in memory, very bad performance for memory access.
 
+
+### branch prediction friendly code
+modern CPU do branching which triggers speculative execution, speculative execution is like hardware level async
+in the code below,  
+if(cond1):  
+  A()  
+else:  
+  B()  
+
+
+The CPU then speculatively executes instructions from A(), becasue it predicts A() will be excuted, while the instructions required to resolve cond1 are still in flight. If finally it turns out, cond1 == True, then it saves time because A() is already calucated(or already being calculated), if  it turns out, cond1 == False, then it needs to do B().
+so, hot loops/paths which are **more predictable by CPU**, will lower latency.
+branches + branch-misses in perf is used to check the its impact on performance.
+
+
+### other latency unfriendly/friendly code to notice(or avoid)
 runtime dispatch of virtual functions invalidate the instruction cache, very bad(generally) for performance. It could have  something to do with indirect-branching and could easily impact performance due to data locality problem.
 
 integer division, multiplication, modulus are generally slow on x86.
@@ -66,17 +82,3 @@ struct of arrays could be much faster
 
 ### use highly optimized libs such as boost
 boost.geometry, boost.graph, boost.internavl
-
-
-### branch prediction friendly code
-modern CPU do branching which triggers speculative execution, speculative execution is like hardware level async
-in the code below,  
-if(cond1):  
-  A()  
-else:  
-  B()  
-
-
-The CPU then speculatively executes instructions from A(), becasue it predicts A() will be excuted, while the instructions required to resolve cond1 are still in flight. If finally it turns out, cond1 == True, then it saves time because A() is already calucated(or already being calculated), if  it turns out, cond1 == False, then it needs to do B().
-so, hot loops/paths which are **more predictable by CPU**, will lower latency.
-branches + branch-misses in perf is used to check the its impact on performance.
