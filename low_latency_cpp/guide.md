@@ -77,5 +77,5 @@ else:
   B()
 
 when CPU reaches it, it make a branch which does A(), and simultaneously does if(cond1), if  if(cond1)==True, then A() is already calucated(or already in calculation), otherwise it does B().
-so, hot loops/paths which are more predictable, will lower latency.
+so, hot loops/paths which are **more predictable**, will lower latency.
 branches + branch-misses in perf is used to check the its impact on performance.
