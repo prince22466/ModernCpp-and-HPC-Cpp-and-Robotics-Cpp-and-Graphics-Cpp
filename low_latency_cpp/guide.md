@@ -68,14 +68,15 @@ struct of arrays could be much faster
 boost.geometry, boost.graph, boost.internavl
 
 
-### branch prediction(out-of-order) friendly code
+### branch prediction friendly code
 modern CPU do branching which triggers speculative execution, speculative execution is like hardware level async
-in the code below, 
-if(cond1):
-  A()
-else:
-  B()
+in the code below,  
+if(cond1):  
+  A()  
+else:  
+  B()  
 
-when CPU reaches it, it make a branch which does A(), and simultaneously does if(cond1), if  if(cond1)==True, then A() is already calucated(or already in calculation), otherwise it does B().
-so, hot loops/paths which are **more predictable**, will lower latency.
+
+The CPU then speculatively executes instructions from A(), becasue it predicts A() will be excuted, while the instructions required to resolve cond1 are still in flight. If finally it turns out, cond1 == True, then it saves time because A() is already calucated(or already being calculated), if  it turns out, cond1 == False, then it needs to do B().
+so, hot loops/paths which are **more predictable by CPU**, will lower latency.
 branches + branch-misses in perf is used to check the its impact on performance.
