@@ -49,7 +49,7 @@ dynamically allocated objects most of time located in different places in memory
 
 pointer-based data structures(trees, list) have nodes in differnt places in memory, very bad performance for memory access.
 
-runtime dispatch of virtual functions invalidate the instruction cache, very bad for performance.
+runtime dispatch of virtual functions invalidate the instruction cache, very bad(generally) for performance. It could have  something to do with indirect-branching and could easily impact performance due to data locality problem.
 
 integer division, multiplication, modulus are generally slow on x86.
 
@@ -68,6 +68,14 @@ struct of arrays could be much faster
 boost.geometry, boost.graph, boost.internavl
 
 
-what is branch instruction
+### branch prediction friendly code
+modern CPU do speculative excution.
+in the code below, 
+if(cond1):
+  A()
+else:
+  B()
 
-code friendly to branch prediction
+when program reach it, it make a branch which does A(), and simultaneously do if(cond1), if  if(cond1)==True, then A() is already calucated(or already in calculation), otherwise it does B().
+so, branching is result of speculative execution, which could be taken advantage of to lower latency.
+Making the condition more predictable will lower latency, which is usually applied in hot loops.
