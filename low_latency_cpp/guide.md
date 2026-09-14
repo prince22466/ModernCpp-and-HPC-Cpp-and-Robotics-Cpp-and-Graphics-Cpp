@@ -5,17 +5,10 @@
 2. performance profile exam( perf in Linux ), perf record + perf report, perf report can show assembly code.
 
 ## General code guide - explore modern processor architecture
-### memory access pattern in modern processor shows why modern CPU make insertion faster in std::vector than std::list
+#### memory access pattern (caching, prefetching) in modern processor shows why modern CPU make insertion faster in std::vector than std::list
 good reference: https://lwn.net/Articles/250967/
-
-early cpu multiple clock cycles per instruction
-modern several instructions per cycle on a single core(due to piplining)
-
-cache of modern process make linear memory access much faster than random access.
-
-modern processer have multiple layers of cache(L1, L2, L3, L4) between register and RAM,
-
-an exmaple of layers of memory size and latency of processor
+modern processer have layers of cache(L1, L2, L3, L4) between register and RAM  
+an example of layers of memory size and latency of processor  
 
 L1: 32KB, 4cycles
 
@@ -25,12 +18,13 @@ L3: 6M, 20cycles
 
 L4: 128M, 58cycels,
 
-RAM: 8GB, 115 cycels
-
-waterfall logic of accessing memory,
+RAM: 8GB, 115 cycles  
 
 
-Modern processor's prefetching, when a memery address is accessed, nearby data is also fetched into catch, that is why sequential(or linear) access is faster than random access.
+cpu multiple clock cycles per instruction
+modern several instructions per cycle on a single core(due to piplining)
+1 clock cycle means 1 one voltage oscillation.  
+CPU frequency 4GHz, which means 4*10^9 oscillation per second => 0.25 ns for clock cycle
 
 
 ### why by-book algo complexity doesnt work in real life.
@@ -38,9 +32,10 @@ data locality(variables spread over different locations in memory, cache line pr
 
 
 ### modern complier optimize code automatically
-old-time code instruction reorgnization(such as changing the order of code block) for performance optimization is largely being done by modern complier. 
+old-time code instruction reorgnization(such as changing the order of code block) for performance optimization(mainly for ILP) is largely being done by modern complier. 
 modoern developer should focus on data access pattern to take advantage of caching of modern processor.
 key words, atomic, volatile can avoid complier optimization.
+
 
 ### cache unfriendly/friendly code to notice(or avoid)
 not using local variable(stack is always 'hot', data is binded closely, use local variable as much as possible).
