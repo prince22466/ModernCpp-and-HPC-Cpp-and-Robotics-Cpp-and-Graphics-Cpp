@@ -6,7 +6,7 @@
 
 ## General code guide - explore modern processor architecture
 #### memory access pattern (caching, prefetching) in modern processor shows why modern CPU make insertion faster in std::vector than std::list
-good reference: https://lwn.net/Articles/250967/
+good reference: https://lwn.net/Articles/250967/  
 modern processer have layers of cache(L1, L2, L3, L4) between register and RAM  
 an example of layers of memory size and latency of processor  
 
