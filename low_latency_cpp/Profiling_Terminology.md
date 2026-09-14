@@ -5,6 +5,25 @@ context switch means one cpu core execute instructions for one execution context
 
 ### threads(hardware)
 hardware threads(aka, physical threads) are execution contexts connected to on CPU core.  
+One physical core
+│
+├── Hardware thread 0 (aka, one execution context)
+│   ├── registers
+│   ├── instruction pointer
+│   └── execution state
+│
+├── Hardware thread 1 (aka, one execution context)
+│   ├── registers
+│   ├── instruction pointer
+│   └── execution state
+│
+└── Shared machinery
+    ├── ALUs
+    ├── SIMD units
+    ├── load/store units
+    ├── caches
+    └── execution pipeline
+
 
 ### multi-threads(program)
 this is thread written in code. which are arranged by OS, to be distribute programs to physical threads.
