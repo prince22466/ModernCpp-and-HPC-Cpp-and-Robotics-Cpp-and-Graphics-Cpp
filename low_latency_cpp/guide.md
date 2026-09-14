@@ -21,10 +21,10 @@ L4: 128M, 58cycels,
 RAM: 8GB, 115 cycles  
 
 
-cpu multiple clock cycles per instruction
-modern several instructions per cycle on a single core(due to piplining)
+cpu multiple clock cycles per instruction  
+modern several instructions per cycle on a single core(due to piplining)  
 1 clock cycle means 1 one voltage oscillation.  
-CPU frequency 4GHz, which means 4*10^9 oscillation per second => 0.25 ns for clock cycle
+CPU frequency 4GHz, which means 4*10^9 oscillation per second => 0.25 ns for clock cycle  
 
 
 ### why by-book algo complexity doesnt work in real life.
